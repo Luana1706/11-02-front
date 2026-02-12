@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro | ESTOQUE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="login-wrapper">
+        
+        <div class="cadastro-section">
+            
+            <div class="section-title">
+                <h1>ESTOQUE</h1>
+                <h2>Criar Conta</h2>
+            </div>
+
+            <p id="feedback" style="display: none; font-size: 13px; margin-bottom: 15px; font-weight: bold;"></p>
+
+            <div class="form-grid">
+                
+                <div class="input-group">
+                    <label>Nome Completo</label>
+                    <input type="text" id="nome" placeholder="Digite seu nome">
+                </div>
+
+                <div class="input-group">
+                    <label>E-mail</label>
+                    <input type="email" id="email" placeholder="Digite seu melhor e-mail">
+                </div>
+
+                <div class="input-group">
+                    <label>Senha</label>
+                    <div style="position: relative; display: flex; align-items: center;">
+                        <input type="password" id="senha" placeholder="Crie uma senha" style="width: 100%;">
+                        <span class="toggle-icon" onclick="toggleSenha()" style="position: absolute; right: 10px; cursor: pointer;">👁</span>
+                    </div>
+                </div>
+
+                <button class="btn-entrar" onclick="executarCadastro()">Finalizar Cadastro</button>
+                <button class="btn-criar" onclick="window.location.href='index.html'">Voltar ao Login</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const feedback = document.getElementById('feedback');
+
+        function mostrarMensagem(texto, cor = "red") {
+            feedback.innerText = texto;
+            feedback.style.color = cor;
+            feedback.style.display = 'block';
+        }
+
+        async function executarCadastro() {
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+
+            if (!nome || !email || !senha) {
+                mostrarMensagem("Preencha todos os campos!");
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3000/login/registrar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nome, email, senha })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    mostrarMensagem("Cadastro realizado! Redirecionando...", "green");
+                    setTimeout(() => {
+                        window.location.href = "index.html"; 
+                    }, 2000);
+                } else {
+                    mostrarMensagem(data.mensagem || "Erro ao cadastrar");
+                }
+            } catch (error) {
+                mostrarMensagem("Erro ao conectar com o servidor.");
+            }
+        }
+
+        function toggleSenha() {
+            const inputSenha = document.getElementById('senha');
+            const icone = document.querySelector('.toggle-icon');
+
+            if (inputSenha.type === 'password') {
+                inputSenha.type = 'text';
+                icone.innerText = '🙈';
+            } else {
+                inputSenha.type = 'password';
+                icone.innerText = '👁';
+            }
+        }
+    </script>
+</body>
+</html>

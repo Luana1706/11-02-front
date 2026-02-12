@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProntoLook Admin | Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script-loja.js" defer></script>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-text">ProntoLook <small>ADMIN</small> 👔</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="active">Estoque</a>
+                <a href="vitrine.html">Vitrine</a>
+                <a href="#">Vendas</a>
+            </nav>
+            <div class="user-profile">
+                <div class="status-indicator">Loja Online</div>
+                <img src="https://via.placeholder.com/40" alt="Admin" class="avatar">
+            </div>
+        </div>
+    </header>
+
+    <main class="admin-container dashboard-layout">
+        
+        <aside class="sidebar-cadastro">
+            <section class="cadastro-section card">
+                <h2>Cadastrar Produto</h2>
+                <div class="form-grid-vertical">
+                    <div class="input-group">
+                        <label>Peça</label>
+                        <input type="text" id="campoPeca" placeholder="Nome da peça">
+                    </div>
+                    <div class="form-row-duplo">
+                        <div class="input-group">
+                            <label>Preço</label>
+                            <input type="number" id="campoPreco" placeholder="89.90">
+                        </div>
+                        <div class="input-group">
+                            <label>Qtd</label>
+                            <input type="number" id="campoQuantidade" placeholder="10">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Categoria</label>
+                        <input type="text" id="campoCategoria" placeholder="Masculino">
+                    </div>
+                    <div class="input-group">
+                        <label>Link da Imagem</label>
+                        <input type="text" id="campoImagem" placeholder="http://...">
+                    </div>
+                    <div class="input-group">
+                        <label>Detalhes</label>
+                        <input type="text" id="campoItemEstoque" placeholder="Tamanho M">
+                    </div>
+                    <input type="hidden" id="campoLojaId" value="1">
+                    <button id="btnSalvar" class="btn-save">Salvar no Sistema</button>
+                </div>
+            </section>
+        </aside>
+
+        <article class="conteudo-principal">
+            <section class="estoque-section card">
+                <div class="section-header-row">
+                    <h2>📦 Controle de Estoque</h2>
+                    <button id="btnListar" class="btn-refresh" onclick="atualizarListaEstoque()">🔄 Atualizar</button>
+                </div>
+
+                <div class="estoque-container">
+                    <div class="estoque-header">
+                        <span class="col-img">Foto</span>
+                        <span class="col-nome">Produto</span>
+                        <span class="col-cat">Categoria</span>
+                        <span class="col-qtd">Qtd</span>
+                        <span class="col-acao">Ações</span>
+                    </div>
+                    <div id="listagemEstoque" class="estoque-lista"></div>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <div id="loader" class="loader" style="display: none;">Conectando...</div>
+    <div id="status-banco" class="status-bubble">Conectado</div>
+
+</body>
+</html>

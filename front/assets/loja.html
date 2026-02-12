@@ -1,0 +1,28 @@
+<section class="estoque-section card">
+                <div class="section-header-row">
+                    <div class="section-title">
+                        <h2>📊 Gestão de Inventário</h2>
+                        <span id="contadorItens" class="badge">Carregando...</span>
+                    </div>
+                    <button onclick="atualizarListaEstoque()" class="btn-refresh">🔄 Atualizar</button>
+                </div>
+
+                <div class="estoque-container">
+                    <div class="estoque-header">
+                        <span class="col-img">Foto</span>
+                        <span class="col-nome">Produto</span>
+                        <span class="col-cat">Categoria</span>
+                        <span class="col-qtd">Qtd</span>
+                        <span class="col-acao">Ações</span>
+                    </div>
+                    <div id="listagemEstoque" class="estoque-lista"></div>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <div id="status-banco" class="status-bubble">Conectado</div>
+
+    <script src="script-loja.js"></script>
+</body>
+</html>
